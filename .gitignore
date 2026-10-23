@@ -1,0 +1,17 @@
+# Local editor and operating-system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local investigation and temporary outputs
+_scratch/
+*.tmp
+*.log
+
+# Do not publish local configuration or credentials
+.env
+.env.*
+!.env.example
+auth.json
+credentials.json
