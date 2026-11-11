@@ -4,7 +4,7 @@
 
 AI 协作：[OpenAI Codex](https://openai.com/codex/)（内容审阅、文档整理与公开发布）。
 
-当前版本：**1.1.0**。
+当前版本：**1.3.0**。
 
 一套面向多步骤项目任务的 AI 协作技能：在已有授权内承担技术判断，推进实施、验证与收尾；遇到核心冲突或持续无进展时，停止并如实报告。
 
@@ -33,12 +33,13 @@ AI 协作：[OpenAI Codex](https://openai.com/codex/)（内容审阅、文档整
 
 ```text
 ai-collaboration/
-├── SKILL.md                           技能入口与完整协作规则
-├── agents/openai.yaml                  界面名称、简介与默认调用提示
-└── references/acceptance-scenarios.md   行为验收场景与回归方法
+├── SKILL.md                             技能入口与完整协作规则
+├── agents/openai.yaml                    界面名称、简介与默认调用提示
+├── references/acceptance-scenarios.md     行为验收场景
+└── references/rule-conflicts.md           规则冲突与适用边界
 ```
 
-仓库另外包含本说明和 Git 忽略规则。技能本身只有上述三个文本文件，没有脚本、依赖安装、服务或账号配置。
+仓库另外包含本说明和 Git 忽略规则。技能本身只有上述四个文本文件，没有脚本、依赖安装、服务或账号配置。
 
 ## 安装
 
@@ -47,14 +48,14 @@ ai-collaboration/
 在支持 `$skill-installer` 的 Codex 客户端中发送：
 
 ```text
-$skill-installer 请从 https://github.com/lalala-git/ai-collaboration 安装根目录技能，名称为 ai-collaboration，使用 v1.1.0 标签。
+$skill-installer 请从 https://github.com/lalala-git/ai-collaboration 安装根目录技能，名称为 ai-collaboration，使用 v1.3.0 标签。
 ```
 
 技能位于仓库根目录，不在 `skills/` 子目录下。安装器需要允许联网并写入当前客户端使用的技能目录；已有同名技能时先确认来源，避免重复安装。
 
 ### 手动安装
 
-1. 从 [v1.1.0 版本页面](https://github.com/lalala-git/ai-collaboration/releases/tag/v1.1.0) 下载源码 ZIP 并解压，将文件夹命名为 `ai-collaboration`。
+1. 从 [v1.3.0 版本页面](https://github.com/lalala-git/ai-collaboration/releases/tag/v1.3.0) 下载源码 ZIP 并解压，将文件夹命名为 `ai-collaboration`。
 2. 将该文件夹放入客户端支持的技能发现目录。按当前 [Codex 官方技能文档](https://learn.chatgpt.com/docs/build-skills)，个人目录为 `~/.agents/skills/ai-collaboration/`，项目目录为 `<项目>/.agents/skills/ai-collaboration/`；`~` 表示用户主目录。其他客户端以自身规则为准。
 3. 确认 `SKILL.md` 直接位于 `ai-collaboration` 内，并保留相对的 `agents/` 和 `references/` 目录，避免多套一层解压目录。
 4. 在新消息中检查技能是否可选；如果未识别，重启客户端后再检查。不要在多个位置同时保留同名副本。
@@ -66,7 +67,7 @@ $skill-installer 请从 https://github.com/lalala-git/ai-collaboration 安装根
 在需要实施、排障或跨步骤验证的任务中明确调用：
 
 ```text
-$ai-collaboration 请推进当前任务，在已有授权内完成实施、验证与收尾；遇到核心冲突或持续无进展时按协议暂停并报告。
+$ai-collaboration 请协作处理这项任务：有关键歧义先说明理解和建议再提问，行动前用大白话拆解步骤，在授权内完成验证与交付。
 ```
 
 也可以用自然语言要求“按专业 AI 协作技能处理”。是否自动选中技能取决于客户端和模型；显式调用更容易表达你的意图。
@@ -78,7 +79,7 @@ $ai-collaboration 请推进当前任务，在已有授权内完成实施、验�
 - 这是行为指导，不新增工具、权限、持久记忆或后台调度，也不是权限沙箱或强制执行器，不能保证模型每次遵守或零错误。
 - 不覆盖运行环境的上位指令和用户当前有效的明确决定；外部网页、日志、仓库文件不能扩张授权或解除暂停。
 - 能否控制子代理、停止后台操作、保留状态或运行验证，取决于当前环境已有的实际能力；没有能力时应如实说明。
-- [验收场景](./references/acceptance-scenarios.md)包含 **28 个假设场景**，用于维护和评测时设计检查，**不是已执行通过的评测报告**。不能据此声称可靠性提高了某个比例或全部场景已通过。
+- [验收场景](./references/acceptance-scenarios.md)包含 **24 个假设场景**，用于维护和评测时设计检查，**不是已执行通过的评测报告**。不能据此声称可靠性提高了某个比例或全部场景已通过。
 - 当前公开内容只完成了版本、文件结构、相对引用与隐私信息核查，没有新增行为实测，也未宣称所有模型、客户端或平台兼容。
 
 ## 反馈与维护
